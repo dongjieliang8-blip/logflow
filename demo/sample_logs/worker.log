@@ -1,0 +1,27 @@
+2026-05-13 08:00:10 [INFO] [worker] Background worker started (pid=1234)
+2026-05-13 08:00:11 [INFO] [worker] Connected to message queue (rabbitmq://localhost:5672)
+2026-05-13 08:05:20 [INFO] [worker] Processing job: send_email (user_id=123, template=welcome)
+2026-05-13 08:05:22 [INFO] [worker] Job completed: send_email (2.1s)
+2026-05-13 08:10:30 [INFO] [worker] Processing job: generate_report (report_id=456)
+2026-05-13 08:10:35 [WARN] [worker] Job slow: generate_report (5.2s, threshold=3s)
+2026-05-13 08:15:00 [ERROR] [worker] Job failed: process_payment (order_id=789)
+  Error: Payment gateway timeout after 30s
+  Stack trace: at PaymentProcessor.process (/app/src/payments/processor.js:127:15)
+2026-05-13 08:15:01 [WARN] [worker] Job retried: process_payment (attempt 2/3)
+2026-05-13 08:15:32 [ERROR] [worker] Job failed: process_payment (order_id=789)
+  Error: Payment gateway timeout after 30s
+  Stack trace: at PaymentProcessor.process (/app/src/payments/processor.js:127:15)
+2026-05-13 08:15:33 [WARN] [worker] Job retried: process_payment (attempt 3/3)
+2026-05-13 08:16:04 [ERROR] [worker] Job failed permanently: process_payment (order_id=789)
+  Error: Payment gateway timeout after 30s
+  Stack trace: at PaymentProcessor.process (/app/src/payments/processor.js:127:15)
+2026-05-13 08:16:05 [ERROR] [worker] Dead letter queue: process_payment moved to DLQ
+2026-05-13 08:20:10 [INFO] [worker] Processing job: sync_inventory (batch=100)
+2026-05-13 08:20:45 [INFO] [worker] Job completed: sync_inventory (35.2s)
+2026-05-13 08:25:00 [ERROR] [worker] Queue backlog warning: 500 messages pending
+2026-05-13 08:25:30 [ERROR] [worker] Queue backlog critical: 1200 messages pending
+2026-05-13 08:30:00 [WARN] [worker] Queue backlog recovering: 200 messages pending
+2026-05-13 08:35:10 [ERROR] [worker] Job failed: export_data (job_id=321)
+  Error: OutOfMemoryError: JavaScript heap out of memory
+  at readFileStream (/app/src/export/stream.js:45:20)
+2026-05-13 08:40:00 [INFO] [worker] Queue backlog cleared: 0 messages pending

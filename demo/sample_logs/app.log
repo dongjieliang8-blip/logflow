@@ -1,0 +1,54 @@
+2026-05-13 08:00:01 [INFO] [main] Application started on port 8080
+2026-05-13 08:00:02 [INFO] [db] Database connection pool initialized (max=10)
+2026-05-13 08:00:03 [INFO] [auth] Authentication service ready
+2026-05-13 08:05:12 [INFO] [api] POST /api/users - 201 Created (45ms)
+2026-05-13 08:05:33 [INFO] [api] GET /api/users/123 - 200 OK (12ms)
+2026-05-13 08:10:45 [WARN] [db] Slow query detected: SELECT * FROM orders WHERE user_id=? (2340ms)
+2026-05-13 08:10:46 [WARN] [db] Connection pool utilization at 85%
+2026-05-13 08:15:22 [ERROR] [api] POST /api/orders - 500 Internal Server Error
+  Traceback (most recent call last):
+    File "/app/src/api/orders.py", line 42, in create_order
+      result = db.execute(query, params)
+    File "/app/src/db/pool.py", line 88, in execute
+      raise ConnectionTimeoutError("Connection pool exhausted")
+  ConnectionTimeoutError: Connection pool exhausted
+2026-05-13 08:15:23 [ERROR] [api] Request failed: POST /api/orders user_id=456
+2026-05-13 08:15:30 [WARN] [db] Connection pool utilization at 95%
+2026-05-13 08:15:45 [ERROR] [api] POST /api/orders - 500 Internal Server Error
+  Traceback (most recent call last):
+    File "/app/src/api/orders.py", line 42, in create_order
+      result = db.execute(query, params)
+    File "/app/src/db/pool.py", line 88, in execute
+      raise ConnectionTimeoutError("Connection pool exhausted")
+  ConnectionTimeoutError: Connection pool exhausted
+2026-05-13 08:16:00 [FATAL] [main] Unhandled exception in request handler
+  Traceback (most recent call last):
+    File "/app/src/api/orders.py", line 42, in create_order
+      result = db.execute(query, params)
+    File "/app/src/db/pool.py", line 88, in execute
+      raise ConnectionTimeoutError("Connection pool exhausted")
+  ConnectionTimeoutError: Connection pool exhausted
+2026-05-13 08:16:01 [ERROR] [main] Process crashed, restarting...
+2026-05-13 08:16:05 [INFO] [main] Application restarted on port 8080
+2026-05-13 08:16:06 [INFO] [db] Database connection pool initialized (max=10)
+2026-05-13 08:20:10 [INFO] [api] GET /api/products - 200 OK (8ms)
+2026-05-13 08:20:15 [WARN] [db] Slow query detected: SELECT * FROM products JOIN inventory ON... (3100ms)
+2026-05-13 08:25:30 [ERROR] [api] GET /api/users/789 - 500 Internal Server Error
+  Traceback (most recent call last):
+    File "/app/src/api/users.py", line 28, in get_user
+      user = cache.get(f"user:{user_id}")
+    File "/app/src/cache/redis.py", line 45, in get
+      raise ConnectionError("Redis connection refused")
+  ConnectionError: Redis connection refused
+2026-05-13 08:25:31 [ERROR] [cache] Redis connection lost, falling back to DB
+2026-05-13 08:30:00 [INFO] [cron] Scheduled job: cleanup_expired_sessions started
+2026-05-13 08:30:15 [WARN] [cron] cleanup_expired_sessions took 15000ms (threshold: 5000ms)
+2026-05-13 08:35:22 [ERROR] [api] POST /api/orders - 500 Internal Server Error
+  Traceback (most recent call last):
+    File "/app/src/api/orders.py", line 42, in create_order
+      result = db.execute(query, params)
+    File "/app/src/db/pool.py", line 88, in execute
+      raise ConnectionTimeoutError("Connection pool exhausted")
+  ConnectionTimeoutError: Connection pool exhausted
+2026-05-13 08:35:23 [WARN] [db] Connection pool utilization at 90%
+2026-05-13 08:40:00 [INFO] [api] Health check: OK
